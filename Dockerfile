@@ -2,17 +2,23 @@ FROM ubuntu:trusty
 MAINTAINER Rischan Mafrur <rischanlab@gmail.com>
 
 WORKDIR /
-RUN apk add --no-cache \
-  build-base \
-  git \
-  python \
-  python-dev \
-  py-pip \
-  libxslt-dev \
-  libxml2-dev \
-  && git clone https://github.com/geopython/pycsw.git
+RUN apt-get update -y && apt-get install -y \
+    software-properties-common \
+    python-software-properties \
+    build-essential \
+    python-dev \
+    python-sqlalchemy \
+    sqlite3 \
+    libproj-dev \
+    git \
+    python-pip \
+    libxml2-dev \
+    libxslt1-dev \
+    wget \
+    zlib1g-dev \
+    libgeos-dev \
+    libgeos++-dev
 
-RUN apt-get update -y
 
 WORKDIR /pycsw
 RUN mkdir /pycsw/XML
