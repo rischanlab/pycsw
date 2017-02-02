@@ -1,23 +1,21 @@
-FROM ubuntu:trusty
+FROM alpine:3.4
 MAINTAINER Rischan Mafrur <rischanlab@gmail.com>
 
 WORKDIR /
-RUN apt-get update -y && apt-get install -y \
-    software-properties-common \
-    python-software-properties \
-    build-essential \
-    python-dev \
-    python-sqlalchemy \
-    sqlite3 \
-    libproj-dev \
-    git \
-    python-pip \
-    libxml2-dev \
-    libxslt1-dev \
-    wget \
-    zlib1g-dev \
-    libgeos-dev \
-    libgeos++-dev
+RUN apk add --no-cache \
+  #linux-headers \
+  build-base \
+  git \
+  python \
+  python-dev \
+  py-pip \
+  libxslt-dev \
+  libxml2-dev \
+  #py-libxml2 \
+  && git clone https://github.com/geopython/pycsw.git
+
+RUN apk add --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted \
+  geos
 
 
 WORKDIR /pycsw
